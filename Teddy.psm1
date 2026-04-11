@@ -1,12 +1,12 @@
 ##### START FILE #####
 
-# NAME: Teddy-Complier.psm1
+# NAME: Teddy.psm1
 
 ### START SCRIPT ###
 
 Start-Transcript -Path "./logs/import.log" -IncludeInvocationHeader
 
-Write-Verbose "[ ] - Initializing module 'Teddy-Complier'..."
+Write-Verbose "[ ] - Initializing module 'Teddy'..."
 
 # Root Directory
 $ModulePath = $PSScriptRoot
@@ -15,8 +15,8 @@ $ModulePath = $PSScriptRoot
 $config = @{
     # Directory Mapping
     DefaultSettingsPath = Join-Path -Path $ModulePath -ChildPath "config/default.settings.json"
-    UserSettingsPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Teddy-Complier/config/user.settings.json"
-    UserSettingsROOTPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Teddy-Complier/config"
+    UserSettingsPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Teddy/config/user.settings.json"
+    UserSettingsROOTPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Teddy/config"
     # Initialize Settings Objects
     DefaultSettings = @{}
     UserSettings = @{}
@@ -32,7 +32,7 @@ if (Test-Path -Path $config.DefaultSettingsPath) {
     } catch {
         ####Write-Error "[X] - Failed to load default settings from '$($config.DefaultSettingsPath)'. Error: $_"
         throw [System.Management.Automation.ErrorRecord]::new(
-            [System.Exception]"CRITICAL: Failed to load default settings from '$($config.DefaultSettingsPath)'. 'Teddy-Complier' PowerShell module cannot load.",
+            [System.Exception]"CRITICAL: Failed to load default settings from '$($config.DefaultSettingsPath)'. 'Teddy' PowerShell module cannot load.",
             "ST_DefaultSettingsLoadFailure", # Error_Codes.md
             [System.Management.Automation.ErrorCategory]::InvalidData,
             $config.DefaultSettingsPath
@@ -41,7 +41,7 @@ if (Test-Path -Path $config.DefaultSettingsPath) {
 } else {
     ###########Write-Error "[X] - Failed to find default settings from '$($config.DefaultSettingsPath)'. Error: $_"
     throw [System.Management.Automation.ErrorRecord]::new(
-        [System.Exception]"CRITICAL: Failed to find default settings from '$($config.DefaultSettingsPath)'. 'Teddy-Complier' PowerShell module cannot load.",
+        [System.Exception]"CRITICAL: Failed to find default settings from '$($config.DefaultSettingsPath)'. 'Teddy' PowerShell module cannot load.",
         "ST_DefaultSettingsFindFailure", # Error_Codes.md
         [System.Management.Automation.ErrorCategory]::ResourceUnavailable,
         $config.DefaultSettingsPath
@@ -72,7 +72,7 @@ if (Test-Path -Path $config.UserSettingsPath) {
     } catch {
         #########Write-Error "Failed to create user settings at '$($config.UserSettingsPath)'. Error: $_"
         throw [System.Management.Automation.ErrorRecord]::new(
-            [System.Exception]"CRITICAL: Failed to create user settings at '$($config.DefaultSettingsPath)'. 'Teddy-Complier' PowerShell module cannot load.",
+            [System.Exception]"CRITICAL: Failed to create user settings at '$($config.DefaultSettingsPath)'. 'Teddy' PowerShell module cannot load.",
             "TC_UserSettingsCreateFailure", # Error_Codes.md
             [System.Management.Automation.ErrorCategory]::PermissionDenied,
             $config.UserSettingsPath
@@ -139,7 +139,7 @@ if ($exportFunc.Count -gt 0) {
 }
 
 # Complete 
-Write-Verbose "[#] - Initialized module 'Teddy-Complier'."
+Write-Verbose "[#] - Initialized module 'Teddy'."
 
 ### END SCRIPT ###
 
