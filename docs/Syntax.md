@@ -14,9 +14,13 @@ Keywords provide commands to be translated into system-wide functions OR assembl
 
 ### Assembly Keywords
 
-- **Reserve** Denoted with the 'res' at the beginning of the statement. MUST be followed with the following in order: variable, operator 'w/','()' with given values of hexadecimal, string, or number, and ';' to end the statement.
+- **Reserve** Denoted with the 'res' at the beginning of the statement. MUST be followed with the following in order: variable, operator 'w/','()' with given values of hexadecimal, string, or number, AND ';' to end the statement.
 ```teddy
 res $variableName w/ (10);
+```
+- **Assembly** Denoted with the 'asm' at the beginning of the block. MUST be followed with the following: '{}' with the given values of Assembly AND ';' to end the block. 
+```teddy
+asm { };
 ```
 
 ## Variables
@@ -47,6 +51,10 @@ $variableName:b
 - **Word** Denoted with the ':w' at the end of the variable name and variable addressing.
 ```teddy
 $variableName:w
+```
+- **Dword** Denoted with the ':d' at the end of the variable name and variable addressing.
+```teddy
+$variableName:d
 ```
 
 ## Logic
